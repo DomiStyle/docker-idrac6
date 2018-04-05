@@ -35,5 +35,5 @@ For advanced configuration options please take a look [here](https://github.com/
 * VNC starts with default 1024x768 resolution instead of fullscreen
   * Use "View" -> "Full Screen" to work around this issue
 * Keyboard layout can't be changed
-* Only one iDRAC server can be access with a single instance
+* Only one iDRAC server can be accessed with a single instance
   * Run multiple containers to work around this issue (e.g. srv1.idrac.example.org, srv2.idrac.example.org)
