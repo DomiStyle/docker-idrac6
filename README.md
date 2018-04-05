@@ -1,5 +1,7 @@
 # iDRAC 6 dockerized
 
+![Web interface](https://i.imgur.com/Au9DPmg.png)
+
 ## About
 
 Allows access to the iDRAC 6 console without installing Java or messing with Java Web Start. Java is only run inside of the container and access is provided via web interface or directly with VNC.
