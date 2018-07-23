@@ -59,11 +59,11 @@ if ( curl -k -y 1 --head https://${IDRAC_HOST}/page/login.html | grep '200 OK' >
   echo "Downloading required files"
 
   download JViewer.jar .
-  download Win64.jar lib
-  download Win32.jar lib
+#  download Win64.jar lib
+#  download Win32.jar lib
   download Linux_x86_32.jar lib
   download Linux_x86_64.jar lib
-  download Mac32.jar lib
+#  download Mac32.jar lib
 
   args=$(curl -k --cookie Cookie=SessionCookie=${COOKIE} https://${IDRAC_HOST}/Java/jviewer.jnlp | awk -F '[<>]' '/argument/ { print $3 }')
 
