@@ -2,7 +2,7 @@ version: '2'
 
 services:
   idrac1:
-    image: domistyle/idrac6
+    image: ncerny/idrac
     restart: always
     ports:
       - 5800:5800
@@ -12,7 +12,7 @@ services:
       - IDRAC_USER=root
       - IDRAC_PASSWORD=1234
   idrac2:
-    image: domistyle/idrac6
+    image: ncerny/idrac
     restart: always
     ports:
       - 5801:5800

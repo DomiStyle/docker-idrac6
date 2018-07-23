@@ -1,4 +1,4 @@
-# iDRAC 6 dockerized
+# iDRAC 5 and 6 dockerized
 
 ![Web interface](https://i.imgur.com/Au9DPmg.png)
 *Web interface*
@@ -8,15 +8,15 @@
 
 ## About
 
-Allows access to the iDRAC 6 console without installing Java or messing with Java Web Start. Java is only run inside of the container and access is provided via web interface or directly with VNC.
+Allows access to the iDRAC console without installing Java or messing with Java Web Start. Java is only run inside of the container and access is provided via web interface or directly with VNC.
 
-Container is based on [baseimage-gui](https://github.com/jlesage/docker-baseimage-gui) by [jlesage](https://github.com/jlesage)
+Container is based on [docker-idrac6](https://github.com/DomiStyle/docker-idrac6) by [DomiStyle](https://github.com/DomiStyle) which in turn is based on [baseimage-gui](https://github.com/jlesage/docker-baseimage-gui) by [jlesage](https://github.com/jlesage)
 
 # Usage
 
-See the docker-compose [here](https://github.com/DomiStyle/docker-idrac6/blob/master/docker-compose.yml) or use this command:
+See the docker-compose [here](https://github.com/ncerny/docker-idrac/blob/master/docker-compose.yml) or use this command:
 
-    docker run -d -p 5800:5800 -p 5900:5900 -e IDRAC_HOST=idrac1.example.org -e IDRAC_USER=root -e IDRAC_PASSWORD=1234 domistyle/idrac6
+    docker run -d -p 5800:5800 -p 5900:5900 -e IDRAC_HOST=idrac1.example.org -e IDRAC_USER=root -e IDRAC_PASSWORD=1234 ncerny/idrac
 
 The web interface will be available on port 5800 while the VNC server can be accessed on 5900. Startup might take a few seconds while the Java libraries are downloaded. You can add a volume on /app if you would like to cache them.
 
