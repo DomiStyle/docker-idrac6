@@ -8,7 +8,7 @@ download() {
   path=$2
   if [ ! -f "${path}/${jar}" ]; then
     if [ "${IDRAC_VERSION}" -eq 5 ]; then
-      URI="Java/release"
+      URI="Applications/dellUI/Java/release"
     elif [ "${IDRAC_VERSION}" -eq 6 ]; then
       URI="software"
     fi
@@ -64,6 +64,6 @@ download Linux_x86_32.jar lib
 download Linux_x86_64.jar lib
 #  download Mac32.jar lib
 
-args=$(curl -k --cookie Cookie=SessionCookie=${COOKIE} https://${IDRAC_HOST}/Java/jviewer.jnlp | awk -F '[<>]' '/argument/ { print $3 }')
+args=$(curl -k --cookie Cookie=SessionCookie=${COOKIE} https://${IDRAC_HOST}/Applications/dellUI/Java/jviewer.jnlp | awk -F '[<>]' '/argument/ { print $3 }')
 
 exec java -Djava.library.path="lib" -jar JViewer.jar $args
