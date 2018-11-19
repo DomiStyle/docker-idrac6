@@ -1,6 +1,7 @@
 FROM jlesage/baseimage-gui:alpine-3.7
 
-ENV APP_NAME="iDRAC 6"
+ENV APP_NAME="iDRAC 6" \
+    IDRAC_PORT=443
 
 RUN apk add --no-cache openjdk7-jre
 
