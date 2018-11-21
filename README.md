@@ -26,9 +26,10 @@ All listed configuration variables are required.
 
 | Variable       | Description                                  |
 |----------------|----------------------------------------------|
-|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST> |
+|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. |
 |`IDRAC_USER`| Username for your iDRAC instance. |
 |`IDRAC_PASSWORD`| Password for your iDRAC instance. |
+|`IDRAC_PORT`| The optional port for the web interface (443 by default) |
 
 For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).
 
