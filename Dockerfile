@@ -1,8 +1,12 @@
-FROM jlesage/baseimage-gui:alpine-3.7
+FROM jlesage/baseimage-gui:ubuntu-16.04
 
 ENV APP_NAME="iDRAC 6"
 
-RUN apk add --no-cache openjdk7-jre
+RUN apt-get update
+RUN apt-get -y install software-properties-common 
+RUN add-apt-repository ppa:openjdk-r/ppa  
+RUN apt-get update
+RUN apt-get -y install openjdk-7-jdk
 
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
