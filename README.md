@@ -35,9 +35,9 @@ For advanced configuration options please take a look [here](https://github.com/
 
 ## Issues & limitations
 
-* Libraries are not loaded correctly
-  * Causes error message on start
-  * "Pass all keystrokes to server", "Single Cursor" and "Virtual Media" is not available until fixed
+* ~Libraries are not loaded correctly~
+  * ~Causes error message on start~
+  * ~"Pass all keystrokes to server", "Single Cursor" and "Virtual Media" is not available until fixed~
 * User preferences can't be saved
 * VNC starts with default 1024x768 resolution instead of fullscreen
   * Use "View" -> "Full Screen" to work around this issue
