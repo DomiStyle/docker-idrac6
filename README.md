@@ -24,14 +24,24 @@ The web interface will be available on port 5800 while the VNC server can be acc
 
 All listed configuration variables are required.
 
-| Variable       | Description                                  |
-|----------------|----------------------------------------------|
-|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. |
-|`IDRAC_USER`| Username for your iDRAC instance. |
-|`IDRAC_PASSWORD`| Password for your iDRAC instance. |
-|`IDRAC_PORT`| The optional port for the web interface (443 by default) |
+| Variable       | Description                                  | Required |
+|----------------|----------------------------------------------|----------|
+|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. | Yes |
+|`IDRAC_USER`| Username for your iDRAC instance. | Yes |
+|`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
+|`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
 
-For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).
+**For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**
+
+## Volumes
+
+| Path       | Description                                  | Required |
+|------------|----------------------------------------------|----------|
+|`/app`| Libraries downloaded from your iDRAC instance will be stored here. Add a volume to cache those files for a faster container startup. | No |
+|`/vmedia`| Can be used to allow virtual media to be mounted. | No |
+|`/screenshots`| Screenshots taken from the virtual console can be stored here. | No |
+
+Make sure the container user has read & write permission to these folders on the host. [More info here](https://github.com/jlesage/docker-baseimage-gui#usergroup-ids).
 
 ## Issues & limitations
 
