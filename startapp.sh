@@ -80,13 +80,13 @@ cd lib
 if [ ! -f lib/avctKVMIOLinux64.so ]; then
     echo "Extracting avctKVMIOLinux64"
 
-    jar -xf avctKVMIOLinux64.jar
+    /usr/lib/jvm/java-1.7-openjdk/bin/jar -xf avctKVMIOLinux64.jar
 fi
 
 if [ ! -f lib/avctVMLinux64.so ]; then
     echo "Extracting avctVMLinux64"
 
-    jar -xf avctVMLinux64.jar
+    /usr/lib/jvm/java-1.7-openjdk/bin/jar -xf avctVMLinux64.jar
 fi
 
 cd /app
