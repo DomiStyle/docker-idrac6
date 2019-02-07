@@ -1,16 +1,14 @@
-FROM jlesage/baseimage-gui:ubuntu-16.04
+FROM jlesage/baseimage-gui:alpine-3.8-glibc
 
 ENV APP_NAME="iDRAC 6" \
-    IDRAC_PORT=443
+    IDRAC_PORT=443 \
+    HOME=/app
 
-RUN apt-get update && \
-    apt-get install -y software-properties-common wget && \
-    add-apt-repository ppa:openjdk-r/ppa && \
-    apt-get update && \
-    apt-get install -y openjdk-7-jdk && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN mkdir /app && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+	apk update && \
+	apk add --no-cache openjdk7 wget && \
+	rm -rf /var/cache/apk/* && \
+    mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
 COPY startapp.sh /startapp.sh
