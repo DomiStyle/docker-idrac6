@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y openjdk-7-jdk gcc && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
-    apt-get remove -y gcc wget software-properties-common && \
+    apt-get remove -y gcc software-properties-common && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
     rm /keycode-hack.c

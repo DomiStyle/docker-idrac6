@@ -93,7 +93,7 @@ cd /app
 
 echo "${GREEN}Initialization complete, starting virtual console${NC}"
 
-if [ -n "$ENABLE_KEYCODE_HACK" ]; then
+if [ -n "$IDRAC_KEYCODE_HACK" ]; then
     echo "Enabling keycode hack"
 
     export LD_PRELOAD=/keycode-hack.so
