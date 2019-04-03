@@ -93,4 +93,10 @@ cd /app
 
 echo "${GREEN}Initialization complete, starting virtual console${NC}"
 
+if [ -n "$IDRAC_KEYCODE_HACK" ]; then
+    echo "Enabling keycode hack"
+
+    export LD_PRELOAD=/keycode-hack.so
+fi
+
 exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=5900 vport=5900 user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:443/help/contents.html"

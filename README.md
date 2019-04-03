@@ -22,14 +22,13 @@ The web interface will be available on port 5800 while the VNC server can be acc
 
 ## Configuration
 
-All listed configuration variables are required.
-
 | Variable       | Description                                  | Required |
 |----------------|----------------------------------------------|----------|
 |`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. | Yes |
 |`IDRAC_USER`| Username for your iDRAC instance. | Yes |
 |`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
 |`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
+|`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
 
 **For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**
 
