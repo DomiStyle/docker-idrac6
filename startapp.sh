@@ -6,6 +6,26 @@ NC='\033[0m'
 
 echo "Starting"
 
+if [ -f "/run/secrets/idrac_host" ]; then
+    echo "Using Docker secret for IDRAC_HOST"
+    IDRAC_HOST="$(cat /run/secrets/idrac_host)"
+fi
+
+if [ -f "/run/secrets/idrac_port" ]; then
+    echo "Using Docker secret for IDRAC_PORT"
+    IDRAC_PORT="$(cat /run/secrets/idrac_port)"
+fi
+
+if [ -f "/run/secrets/idrac_user" ]; then
+    echo "Using Docker secret for IDRAC_USER"
+    IDRAC_USER="$(cat /run/secrets/idrac_user)"
+fi
+
+if [ -f "/run/secrets/idrac_password" ]; then
+    echo "Using Docker secret for IDRAC_PASSWORD"
+    IDRAC_PASSWORD="$(cat /run/secrets/idrac_password)"
+fi
+
 if [ -z "${IDRAC_HOST}" ]; then
     echo "${RED}Please set a proper idrac host with IDRAC_HOST${NC}"
     sleep 2
