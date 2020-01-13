@@ -1,4 +1,4 @@
-version: '2'
+version: '3.1'
 
 services:
   idrac1:
@@ -21,11 +21,18 @@ services:
     ports:
       - 5801:5800
       - 5901:5900
-    environment:
-      - IDRAC_HOST=idrac2.example.org
-      - IDRAC_USER=root
-      - IDRAC_PASSWORD=1234
+    secrets:
+      - idrac_host
+      - idrac_user
+      - idrac_password
     volumes:
       - /path/to/app:/app
       - /path/to/media:/vmedia
       - /path/to/screenshots:/screenshots
+secrets:
+  idrac_host:
+    file: ./idrac_host.txt
+  idrac_user:
+    file: ./idrac_user.txt
+  idrac_password:
+    file: ./idrac_password.txt
