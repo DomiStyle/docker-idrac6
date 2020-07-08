@@ -1,7 +1,8 @@
 FROM jlesage/baseimage-gui:ubuntu-16.04
 
 ENV APP_NAME="iDRAC 6" \
-    IDRAC_PORT=443
+    IDRAC_PORT=443 \
+    IDRAC_VPORT=5900
 
 COPY keycode-hack.c /keycode-hack.c
 
