@@ -16,6 +16,12 @@ if [ -f "/run/secrets/idrac_port" ]; then
     IDRAC_PORT="$(cat /run/secrets/idrac_port)"
 fi
 
+
+if [ -f "/run/secrets/idrac_vport" ]; then
+    echo "Using Docker secret for IDRAC_VPORT"
+    IDRAC_VPORT="$(cat /run/secrets/idrac_vport)"
+fi
+
 if [ -f "/run/secrets/idrac_user" ]; then
     echo "Using Docker secret for IDRAC_USER"
     IDRAC_USER="$(cat /run/secrets/idrac_user)"
@@ -34,6 +40,12 @@ fi
 
 if [ -z "${IDRAC_PORT}" ]; then
     echo "${RED}Please set a proper idrac port with IDRAC_PORT${NC}"
+    sleep 2
+    exit 1
+fi
+
+if [ -z "${IDRAC_VPORT}" ]; then
+    echo "${RED}Please set a proper idrac vport with IDRAC_VPORT${NC}"
     sleep 2
     exit 1
 fi
@@ -119,4 +131,4 @@ if [ -n "$IDRAC_KEYCODE_HACK" ]; then
     export LD_PRELOAD=/keycode-hack.so
 fi
 
-exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=5900 vport=5900 user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:443/help/contents.html"
+exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=${IDRAC_VPORT} vport=${IDRAC_VPORT} user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:443/help/contents.html"
