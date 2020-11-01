@@ -8,9 +8,9 @@ services:
       - 5800:5800
       - 5900:5900
     environment:
-      - IDRAC_HOST=idrac1.example.org
+      - IDRAC_HOST=https://192.168.0.120
       - IDRAC_USER=root
-      - IDRAC_PASSWORD=1234
+      - IDRAC_PASSWORD=calvin
     volumes:
       - /path/to/app:/app
       - /path/to/media:/vmedia
