@@ -1,9 +1,9 @@
 # iDRAC 6 dockerized
 
-![Web interface](https://i.imgur.com/Au9DPmg.png)
+![Web interface](https://i.imgur.com/Sg6qYtT.png)
 *Web interface*
 
-![Guacamole](https://i.imgur.com/8IWAATS.png)
+![Guacamole](https://i.imgur.com/LcD0q2a.png)
 *Directly connected to VNC via Guacamole*
 
 ## About
@@ -15,9 +15,15 @@ Container is based on [baseimage-gui](https://github.com/jlesage/docker-baseimag
 # Usage
 
 See the docker-compose [here](https://github.com/DomiStyle/docker-idrac6/blob/master/docker-compose.yml) or use this command:
-
-    docker run -d -p 5800:5800 -p 5900:5900 -e IDRAC_HOST=idrac1.example.org -e IDRAC_USER=root -e IDRAC_PASSWORD=1234 domistyle/idrac6
-
+```
+docker run -d \
+  -p 5800:5800 \
+  -p 5900:5900 \
+  -e IDRAC_HOST=idrac1.example.org \
+  -e IDRAC_USER=root \
+  -e IDRAC_PASSWORD=1234 \
+  domistyle/idrac6
+```
 The web interface will be available on port 5800 while the VNC server can be accessed on 5900. Startup might take a few seconds while the Java libraries are downloaded. You can add a volume on /app if you would like to cache them.
 
 ## Configuration
@@ -29,6 +35,7 @@ The web interface will be available on port 5800 while the VNC server can be acc
 |`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
 |`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
 |`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
+|`VIRTUAL_MEDIA`| Filename of iso located within /vmedia to automount | No |
 
 **For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**
 
