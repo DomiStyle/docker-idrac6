@@ -1,9 +1,11 @@
 # iDRAC 6 dockerized
 
-![Web interface](https://i.imgur.com/Sg6qYtT.png)
+<img src="https://i.imgur.com/Sg6qYtT.png" alt="Web interface" width="100%" />
+
 *Web interface*
 
-![Guacamole](https://i.imgur.com/LcD0q2a.png)
+<img src="https://i.imgur.com/LcD0q2a.png" alt="Guacamole" width="100%" />
+
 *Directly connected to VNC via Guacamole*
 
 ## About
