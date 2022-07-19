@@ -11,7 +11,7 @@ RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/maste
     install_app_icon.sh "$APP_ICON_URL"
 
 RUN apt-get update && \
-    apt-get install -y wget software-properties-common libx11-dev gcc xdotool && \
+    apt-get install -y wget software-properties-common libx11-dev gcc xdotool curl && \
     wget -nc https://cdn.azul.com/zulu/bin/zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
     apt-get install -y ./zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
