@@ -4,6 +4,10 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 NC='\033[0m'
 
+_curl() {
+    curl --verbose --insecure --ciphers 'DEFAULT:!DH' "$@"
+}
+
 echo "Starting"
 
 if [ -f "/run/secrets/idrac_host" ]; then
@@ -52,7 +56,7 @@ fi
 
 echo "Environment ok"
 
-cd /app
+cd /app || exit
 
 if [ ! -d "lib" ]; then
     echo "Creating library folder"
@@ -62,7 +66,7 @@ fi
 if [ ! -f avctKVM.jar ]; then
     echo "Downloading avctKVM"
 
-    wget https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVM.jar --no-check-certificate
+    _curl -o avctKVM.jar https://"${IDRAC_HOST}":"${IDRAC_PORT}"/software/avctKVM.jar
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctKVM.jar, please check your settings${NC}"
@@ -74,7 +78,7 @@ fi
 if [ ! -f lib/avctKVMIOLinux64.jar ]; then
     echo "Downloading avctKVMIOLinux64"
 
-    wget -O lib/avctKVMIOLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVMIOLinux64.jar --no-check-certificate
+    _curl -o lib/avctKVMIOLinux64.jar https://"${IDRAC_HOST}":"${IDRAC_PORT}"/software/avctKVMIOLinux64.jar
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctKVMIOLinux64.jar, please check your settings${NC}"
@@ -86,7 +90,7 @@ fi
 if [ ! -f lib/avctVMLinux64.jar ]; then
     echo "Downloading avctVMLinux64"
 
-    wget -O lib/avctVMLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctVMLinux64.jar --no-check-certificate
+    _curl -o lib/avctVMLinux64.jar https://"${IDRAC_HOST}":"${IDRAC_PORT}"/software/avctVMLinux64.jar
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctVMLinux64.jar, please check your settings${NC}"
@@ -95,7 +99,7 @@ if [ ! -f lib/avctVMLinux64.jar ]; then
     fi
 fi
 
-cd lib
+cd lib || exit
 
 if [ ! -f lib/avctKVMIOLinux64.so ]; then
     echo "Extracting avctKVMIOLinux64"
@@ -109,7 +113,7 @@ if [ ! -f lib/avctVMLinux64.so ]; then
     jar -xf avctVMLinux64.jar
 fi
 
-cd /app
+cd /app || exit
 
 echo "${GREEN}Initialization complete, starting virtual console${NC}"
 
