@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
-RUN perl -i -pe 's/^(\h*jdk\.tls\.disabledAlgorithms\h*=\h*)([\w.\h<>\n\\,]*)(TLSv1[,\n\h]\h*)/$1$2/m' /usr/lib/jvm/zulu-7-amd64/jre/lib/security/java.security
+RUN rm /usr/lib/jvm/zulu-7-amd64/jre/lib/security/java.security
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
