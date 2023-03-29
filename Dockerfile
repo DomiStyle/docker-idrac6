@@ -12,8 +12,8 @@ RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/maste
 
 RUN apt-get update && \
     apt-get install -y wget software-properties-common libx11-dev gcc xdotool && \
-    wget -nc https://cdn.azul.com/zulu/bin/zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
-    apt-get install -y ./zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
+    wget -nc https://cdn.azul.com/zulu/bin/zulu8.68.0.21-ca-jdk8.0.362-linux_amd64.deb && \
+    apt-get install -y ./zulu8.68.0.21-ca-jdk8.0.362-linux_amd64.deb && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
     apt-get remove -y gcc software-properties-common && \
     apt-get autoremove -y && \
@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
-RUN rm /usr/lib/jvm/zulu-7-amd64/jre/lib/security/java.security
+RUN rm /usr/lib/jvm/zulu-8-amd64/jre/lib/security/java.security
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
