@@ -12,8 +12,8 @@ RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/maste
 
 RUN apt-get update && \
     apt-get install -y wget software-properties-common libx11-dev gcc xdotool curl && \
-    wget -nc https://cdn.azul.com/zulu/bin/zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
-    apt-get install -y ./zulu7.52.0.11-ca-jdk7.0.332-linux_amd64.deb && \
+    wget -nc https://corretto.aws/downloads/latest/amazon-corretto-8-x64-linux-jdk.deb && \
+    apt-get install -y ./amazon-corretto-8-x64-linux-jdk.deb && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
     apt-get remove -y gcc software-properties-common && \
     apt-get autoremove -y && \
@@ -23,7 +23,7 @@ RUN apt-get update && \
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
-RUN perl -i -pe 's/^(\h*jdk\.tls\.disabledAlgorithms\h*=\h*)([\w.\h<>\n\\,]*)(TLSv1[,\n\h]\h*)/$1$2/m' /usr/lib/jvm/zulu-7-amd64/jre/lib/security/java.security
+RUN perl -i -pe 's/^(\h*jdk\.tls\.disabledAlgorithms\h*=\h*)([\w.\h<>\n\\,]*)(TLSv1[,\n\h]\h*)/$1$2/m' /usr/lib/jvm/java-1.8.0-amazon-corretto/jre/lib/security/java.security
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
