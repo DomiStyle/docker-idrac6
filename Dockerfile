@@ -12,8 +12,8 @@ RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/maste
 
 RUN apt-get update && \
     apt-get install -y wget software-properties-common libx11-dev gcc xdotool gnupg ca-certificates curl && \
-    curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg
-    echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list
+    curl -s https://repos.azul.com/azul-repo.key | gpg --dearmor -o /usr/share/keyrings/azul.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | tee /etc/apt/sources.list.d/zulu.list && \
     apt-get update && \
     apt-get install -y zulu8-jre && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
@@ -25,7 +25,7 @@ RUN apt-get update && \
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
-RUN rm /usr/lib/jvm/zulu-8-arm64/jre/lib/security/java.security
+RUN find /usr/lib/jvm/ -name "java.security" -exec rm {} \;
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
