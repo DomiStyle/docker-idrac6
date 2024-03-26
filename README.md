@@ -28,6 +28,25 @@ docker run -d \
 ```
 The web interface will be available on port 5800 while the VNC server can be accessed on 5900. Startup might take a few seconds while the Java libraries are downloaded. You can add a volume on /app if you would like to cache them.
 
+## Usage (with SOCKS)
+
+```
+# Start a local port forwarding using SOCKS
+ssh -fND 4443 <remote-hostname>
+docker run -d \
+  -p 5800:5800 \
+  -p 5900:5900 \
+  -e IDRAC_HOST=idrac1.example.org \
+  -e IDRAC_USER=root \
+  -e IDRAC_PASSWORD=1234 \
+  -e SOCKS_PROXY_HOST=host.docker.internal \
+  -e SOCKS_PROXY_PORT=4443 \
+  domistyle/idrac6
+```
+
+NB: `host.docker.internal` only works on Windows and MacOS since Docker 18.03+.
+
+
 ## Configuration
 
 | Variable       | Description                                  | Required |
@@ -38,6 +57,8 @@ The web interface will be available on port 5800 while the VNC server can be acc
 |`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
 |`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
 |`VIRTUAL_MEDIA`| Filename of iso located within /vmedia to automount | No |
+|`SOCKS_PROXY_HOST`| The optional host for the SOCKS5 proxy. (disabled by default) | No |
+|`SOCKS_PROXY_PORT`| The optional port for the SOCKS5 proxy. (disabled by default) | No |
 
 **For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**
 
