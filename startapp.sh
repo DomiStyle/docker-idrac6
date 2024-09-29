@@ -129,7 +129,8 @@ if [ -n "$IDRAC_KEYCODE_HACK" ]; then
 
     export LD_PRELOAD=/keycode-hack.so
 fi
-exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=${IDRAC_VNC_PORT} vport=${IDRAC_VNC_PORT} user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:${IDRAC_PORT}/help/contents.html" &
+
+exec java -cp avctKVM.jar -XX:+AlwaysPreTouch -XX:+TieredCompilation -XX:NewRatio=1 -XX:+UseConcMarkSweepGC -XX:MaxMetaspaceSize=1024m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:MaxTenuringThreshold=15 -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=${IDRAC_VNC_PORT} vport=${IDRAC_VNC_PORT} user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:${IDRAC_PORT}/help/contents.html" &
 
 # If an iso exists at the specified location, mount it
 [ -f "/vmedia/$VIRTUAL_ISO" ] && /mountiso.sh
