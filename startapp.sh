@@ -26,6 +26,11 @@ if [ -f "/run/secrets/idrac_password" ]; then
     IDRAC_PASSWORD="$(cat /run/secrets/idrac_password)"
 fi
 
+if [ -f "/run/secrets/idrac_vnc_port" ]; then
+    echo "Using Docker secret for IDRAC_VNC_PORT"
+    IDRAC_VNC_PORT="$(cat /run/secrets/idrac_vnc_port)"
+fi
+
 if [ -z "${IDRAC_HOST}" ]; then
     echo "${RED}Please set a proper idrac host with IDRAC_HOST${NC}"
     sleep 2
@@ -46,6 +51,12 @@ fi
 
 if [ -z "${IDRAC_PASSWORD}" ]; then
     echo "${RED}Please set a proper idrac password with IDRAC_PASSWORD${NC}"
+    sleep 2
+    exit 1
+fi
+
+if [ -z "${IDRAC_VNC_PORT}" ]; then
+    echo "${RED}Please set a proper idrac VNC port with IDRAC_VNC_PORT${NC}"
     sleep 2
     exit 1
 fi
@@ -118,7 +129,8 @@ if [ -n "$IDRAC_KEYCODE_HACK" ]; then
 
     export LD_PRELOAD=/keycode-hack.so
 fi
-exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=5900 vport=5900 user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:443/help/contents.html" &
+
+exec java -cp avctKVM.jar -XX:+AlwaysPreTouch -XX:+TieredCompilation -XX:NewRatio=1 -XX:+UseConcMarkSweepGC -XX:MaxMetaspaceSize=1024m -XX:ParallelGCThreads=2 -XX:ConcGCThreads=2 -XX:MaxTenuringThreshold=15 -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=${IDRAC_VNC_PORT} vport=${IDRAC_VNC_PORT} user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:${IDRAC_PORT}/help/contents.html" &
 
 # If an iso exists at the specified location, mount it
 [ -f "/vmedia/$VIRTUAL_ISO" ] && /mountiso.sh

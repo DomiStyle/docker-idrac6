@@ -32,10 +32,11 @@ The web interface will be available on port 5800 while the VNC server can be acc
 
 | Variable       | Description                                  | Required |
 |----------------|----------------------------------------------|----------|
-|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT for using custom ports. HTTPS is always used. | Yes |
+|`IDRAC_HOST`| Host for your iDRAC instance. Make sure your instance is reachable with https://<IDRAC_HOST>. See IDRAC_PORT and IDRAC_VNC_PORT for using custom ports. HTTPS is always used. | Yes |
 |`IDRAC_USER`| Username for your iDRAC instance. | Yes |
 |`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
 |`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
+|`IDRAC_VNC_PORT`| The optional port for the VNC interface. (5900 by default) | No |
 |`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
 |`VIRTUAL_MEDIA`| Filename of iso located within /vmedia to automount | No |
 
