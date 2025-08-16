@@ -16,7 +16,7 @@ Container is based on [baseimage-gui](https://github.com/jlesage/docker-baseimag
 
 # Usage
 
-See the docker-compose [here](https://github.com/DomiStyle/docker-idrac6/blob/master/docker-compose.yml) or use this command:
+See the docker-compose [here](https://github.com/SeineEloquenz/docker-idrac6/blob/master/docker-compose.yml) or use this command:
 ```
 docker run -d \
   -p 5800:5800 \

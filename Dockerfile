@@ -7,7 +7,7 @@ ENV APP_NAME="iDRAC 6"  \
 
 COPY keycode-hack.c /keycode-hack.c
 
-RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/master/icon.png && \
+RUN APP_ICON_URL=https://raw.githubusercontent.com/SeineEloquenz/docker-idrac6/master/icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
 RUN apt-get update && \
