@@ -1,0 +1,44 @@
+name: Build and Publish Docker image
+
+on:
+  push:
+    branches: [ "main" ]   # Always build on main
+    tags: [ "v*" ]         # Publish only when a version tag is pushed
+  pull_request:
+    branches: [ "main" ]   # Build on PRs too
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Only login when pushing (tags)
+      - name: Log in to GitHub Container Registry
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build only (no push) for branches/PRs
+      - name: Build Docker image (no push)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: docker/build-action@v5
+
+      # Build & push for tags
+      - name: Build and push Docker image (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/docker-idrac:latest
+            ghcr.io/${{ github.repository_owner }}/docker-idrac:${{ github.ref_name }}
