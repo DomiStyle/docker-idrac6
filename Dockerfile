@@ -10,8 +10,9 @@ COPY keycode-hack.c /keycode-hack.c
 RUN APP_ICON_URL=https://raw.githubusercontent.com/DomiStyle/docker-idrac6/master/icon.png && \
     install_app_icon.sh "$APP_ICON_URL"
 
-RUN apt-get update && \
-    apt-get install -y wget software-properties-common libx11-dev gcc xdotool && \
+RUN getent group messagebus >/dev/null || addgroup --system messagebus && \
+    apt-get update && \
+    apt-get install -y wget software-properties-common libx11-dev gcc xdotool websockify && \
     wget -nc https://cdn.azul.com/zulu/bin/zulu8.68.0.21-ca-jdk8.0.362-linux_amd64.deb && \
     apt-get install -y ./zulu8.68.0.21-ca-jdk8.0.362-linux_amd64.deb && \
     gcc -o /keycode-hack.so /keycode-hack.c -shared -s -ldl -fPIC && \
@@ -27,5 +28,8 @@ RUN rm /usr/lib/jvm/zulu-8-amd64/jre/lib/security/java.security
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
+COPY rootfs/ /
+
+RUN chmod 755 /etc/services.d/websockify/run
 
 WORKDIR /app
