@@ -25,7 +25,7 @@ RUN apt-get update && \
 RUN mkdir /app && \
     chown ${USER_ID}:${GROUP_ID} /app
 
-RUN rm /usr/lib/jvm/zulu8-ca-amd64/jre/lib/security/java.security
+RUN find /usr/lib/jvm/ -name "java.security" -exec rm {} \;
 
 COPY startapp.sh /startapp.sh
 COPY mountiso.sh /mountiso.sh
