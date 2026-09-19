@@ -73,25 +73,33 @@ fi
 
 if [ ! -f lib/avctKVMIOLinux64.jar ]; then
     echo "Downloading avctKVMIOLinux64"
-
     wget -O lib/avctKVMIOLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVMIOLinux64.jar --no-check-certificate
 
     if [ ! $? -eq 0 ]; then
-        echo "${RED}Failed to download avctKVMIOLinux64.jar, please check your settings${NC}"
-        sleep 2
-        exit 2
+        echo "${RED}Could not download avctKVMIOLinux64.jar, trying with avctKVMIOLinux.jar filename instead${NC}"
+        wget -O lib/avctKVMIOLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVMIOLinux.jar --no-check-certificate
+
+        if [ ! $? -eq 0 ]; then
+            echo "${RED}Failed to download avctKVMIOLinux64.jar, please check your settings${NC}"
+            sleep 2
+            exit 2
+	fi
     fi
 fi
 
 if [ ! -f lib/avctVMLinux64.jar ]; then
     echo "Downloading avctVMLinux64"
-
     wget -O lib/avctVMLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctVMLinux64.jar --no-check-certificate
 
     if [ ! $? -eq 0 ]; then
-        echo "${RED}Failed to download avctVMLinux64.jar, please check your settings${NC}"
-        sleep 2
-        exit 2
+        echo "${RED}Could not download avctVMLinux64.jar, trying with avctVMLinux.jar filename instead${NC}"
+	wget -O lib/avctVMLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctVMLinux.jar --no-check-certificate
+
+	if [ ! $? -eq 0 ]; then
+            echo "${RED}Failed to download avctVMLinux64.jar, please check your settings${NC}"
+	    sleep 2
+	    exit 2
+	fi
     fi
 fi
 
