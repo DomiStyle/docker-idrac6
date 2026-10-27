@@ -37,7 +37,7 @@ The web interface will be available on port 5800 while the VNC server can be acc
 |`IDRAC_PASSWORD`| Password for your iDRAC instance. | Yes |
 |`IDRAC_PORT`| The optional port for the web interface. (443 by default) | No |
 |`IDRAC_KEYCODE_HACK`| If you have issues with keyboard input, try setting this to ``true``. See [here](https://github.com/anchor/idrac-kvm-keyboard-fix) for more infos. | No |
-|`VIRTUAL_MEDIA`| Filename of iso located within /vmedia to automount | No |
+|`VIRTUAL_ISO`| Filename of iso located within /vmedia to automount | No |
 
 **For advanced configuration options please take a look [here](https://github.com/jlesage/docker-baseimage-gui#environment-variables).**
 
