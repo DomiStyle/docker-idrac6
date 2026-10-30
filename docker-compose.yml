@@ -8,16 +8,16 @@ services:
       - 5800:5800
       - 5900:5900
     environment:
-      - IDRAC_HOST=idrac1.example.org
-      - IDRAC_USER=root
-      - IDRAC_PASSWORD=1234
+      - IDRAC_HOST=${IDRAC_HOST:-idrac1.example.org}
+      - IDRAC_USER=${IDRAC_USER:-root}
+      - IDRAC_PASSWORD=${IDRAC_PASSWORD:-1234}
     # Experimental! To directly mount an iso as iDRAC virtual media, 
     # uncomment the below and set to a filename that appears in /vmedia
       # - VIRTUAL_ISO=name_of_iso.iso
     volumes:
-      - /path/to/app:/app
-      - /path/to/media:/vmedia
-      - /path/to/screenshots:/screenshots
+      - ${PATH_APP:-./app}:/app
+      - ${PATH_VMEDIA:-./vmedia}:/vmedia
+      - ${PATH_SCREENSHOTS:-./screenshots}:/screenshots
   idrac2:
     image: domistyle/idrac6
     restart: always
@@ -29,9 +29,9 @@ services:
       - idrac_user
       - idrac_password
     volumes:
-      - /path/to/app:/app
-      - /path/to/media:/vmedia
-      - /path/to/screenshots:/screenshots
+      - ${PATH_APP:-./app}:/app
+      - ${PATH_VMEDIA:-./vmedia}:/vmedia
+      - ${PATH_SCREENSHOTS:-./screenshots}:/screenshots
 secrets:
   idrac_host:
     file: ./idrac_host.txt
